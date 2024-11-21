@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Mail</title>
+    <style>
+        /* Basic Reset */
+        body, h1, p {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Full height for the body and html */
+        html, body {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Light blue header */
+        header {
+            background-color: #74997e;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Content area styling */
+        .content {
+            padding: 20px;
+            background-color: #f9f9f9; /* Light gray background for content */
+            flex-grow: 1; /* This will allow content to grow and take available space */
+        }
+
+        /* Light blue footer */
+        footer {
+            background-color: #74997e;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px;
+            /* Make the footer stick to the bottom */
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1 th:text="${company}"></h1th:text></h1>
+</header>
+
+<div class="content">
+    <!-- Space for content -->
+    <p>Hi Ajay, This is the second follow up mail for this company. You won't receive any further follow
+        up mails of this company from today. Apply for new jobs as many as possible and try as soon as possible to
+    switch the career from Infosys to land into your passionated domain.</p>
+</div>
+
+<footer>
+    <p>Thank you,</p>
+    <p>It's me yours AJAY</p>
+</footer>
+
+</body>
+</html>
