@@ -40,7 +40,7 @@ public class FollowUpMailSender {
     public String welcomeHtmlMail(ApplicationTrackerDTO applicationTrackerDTO) throws MessagingException {
         MimeMessage mimeMailMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMailMessage,true);
-        mimeMessageHelper.setTo("15691a03b3@gmail.com");
+        mimeMessageHelper.setTo("ajaykumar.kondreddy02@gmail.com");
         mimeMessageHelper.setSubject(applicationTrackerDTO.getCompanyAppliedTo() +" Job Applied Successfully");
         log.info("Applied to {}", applicationTrackerDTO.getCompanyAppliedTo());
         String emailContent = buildEmailBody(applicationTrackerDTO);
