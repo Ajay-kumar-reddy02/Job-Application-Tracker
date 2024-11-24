@@ -5,9 +5,16 @@ import com.jobApplicationTracker.service.ApplicationTrackerService;
 import com.jobApplicationTracker.utility.FollowUpMailSender;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.InputStreamSource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/Job-Application-Tracker")
@@ -34,5 +41,19 @@ public class ApplicationTrackerController {
     public ResponseEntity<String> sendMail(){
         String s = followUpMailSender.welcomeMail();
         return new ResponseEntity<>(s, HttpStatus.OK);
+    }
+
+    @GetMapping("/downloadExcel")
+    public ResponseEntity<InputStreamSource> getInExcel() throws IOException {
+        ByteArrayInputStream jobDetailsInExcel = applicationTrackerService.getJobDetailsInExcel();
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "attachment; filename=AllJobDetails.xlsx");
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+                .body(new InputStreamResource(jobDetailsInExcel));
+
     }
 }
