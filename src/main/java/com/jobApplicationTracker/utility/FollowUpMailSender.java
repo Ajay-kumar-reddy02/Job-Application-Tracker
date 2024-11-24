@@ -66,7 +66,8 @@ public class FollowUpMailSender {
         List<ApplicationTrackerEntity> byFirstFollowUp = applicationTrackerRepository.findByFirstFollowUp(today);
         byFirstFollowUp.forEach(application -> {
             UpdateStatus updateFromCompany = application.getUpdateFromCompany();
-            log.info("The Update from the {} is {}", application.getCompanyAppliedTo(), application.getUpdateFromCompany());
+            log.info("The Update from the {} is {}", application.getCompanyAppliedTo(),
+                    application.getUpdateFromCompany());
             if(updateFromCompany.name().equals("No")){
                 try {
                     sendMail(application, application.getCompanyAppliedTo() + " First Follow Message");
@@ -105,10 +106,12 @@ public class FollowUpMailSender {
         List<ApplicationTrackerEntity> byFirstFollowUp = applicationTrackerRepository.findBySecondFollowUp(today);
         byFirstFollowUp.forEach(application -> {
             UpdateStatus updateFromCompany = application.getUpdateFromCompany();
-            log.info("The Update from the {} is {}", application.getCompanyAppliedTo(), application.getUpdateFromCompany());
+            log.info("The Update from the {} is {}", application.getCompanyAppliedTo(),
+                    application.getUpdateFromCompany());
             if(updateFromCompany.name().equals("No")){
                 try {
-                    secondFollowUpsendMail(application, application.getCompanyAppliedTo() + " First Follow Message");
+                    secondFollowUpsendMail(application,
+                            application.getCompanyAppliedTo() + " First Follow Message");
                 }catch(MessagingException e){
                     e.printStackTrace();;
                 }
@@ -117,7 +120,8 @@ public class FollowUpMailSender {
     }
 
     //Second Follow Up sendMail
-    public void secondFollowUpsendMail(ApplicationTrackerEntity applicationTrackerEntity, String subject) throws MessagingException {
+    public void secondFollowUpsendMail(ApplicationTrackerEntity applicationTrackerEntity, String subject)
+            throws MessagingException {
         MimeMessage mimeMailMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMailMessage,true);
         mimeMessageHelper.setTo("ajaykumar.kondreddy02@gmail.com");
